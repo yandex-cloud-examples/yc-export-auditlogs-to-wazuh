@@ -101,7 +101,7 @@ export YC_TOKEN=$(yc iam create-token)
 export YC_FOLDER_ID=$(yc config get folder-id)
 
 ```
-После этого запускаем сборку образа(запускаем в папке `packer`)
+После этого перейдите обратно в директорию packer и запускаем сборку образа(запускаем в папке `packer`)
 ```shell
 packer build .
 ```
@@ -139,6 +139,14 @@ terraform apply
 ## Логины и пароли
 Все логины и пароли хранятся локально на  сервере в архиве `/var/ossec/wazuh-install-files.tar`
 Подключитесь по ssh к серверу, перейдите в папку /var/ossec/ и распакуйте архив.
+
+```shell
+ssh ubuntu@<ip address>
+```
+
+## Схема 
+
+![Yandex Trail](./img/wazuh_yandex.png)
 
 ## Настройка Yandex Audit Trails
 
