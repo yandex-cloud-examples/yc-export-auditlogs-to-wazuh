@@ -41,10 +41,16 @@ resource "yandex_storage_bucket" "this" {
   secret_key    = yandex_iam_service_account_static_access_key.this.secret_key
   bucket        = "${var.name}-${format(var.count_format, var.count_offset)}-${random_pet.this.id}"
   force_destroy = true
+  depends_on    = [yandex_iam_service_account.this]
+}
+
+resource "yandex_storage_bucket_grant" "this" {
+  bucket     = yandex_storage_bucket.this.bucket
+  access_key = yandex_iam_service_account_static_access_key.this.access_key
+  secret_key = yandex_iam_service_account_static_access_key.this.secret_key
   grant {
     id          = yandex_iam_service_account.this.id
     type        = "CanonicalUser"
     permissions = ["READ", "WRITE"]
   }
-  depends_on = [yandex_iam_service_account.this]
 }
